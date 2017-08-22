@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect("sql3.freesqldatabase.com", "sql3187742", "Zv88yMhj2U", "sql3187742");
+    $con = mysqli_connect("localhost", "id2661191_usercredentials", "Wishist123", "id2661191_wishlist");
     
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -9,13 +9,14 @@
     mysqli_stmt_execute($statement);
     
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $userID, $username, $password);
+    mysqli_stmt_bind_result($statement, $userID, $email, $username, $password);
     
     $response = array();
     $response["success"] = false;  
     
     while(mysqli_stmt_fetch($statement)){
-        $response["success"] = true;  
+        $response["success"] = true;
+		$response["email"] = $email;
         $response["username"] = $username;
         $response["password"] = $password;
     }
